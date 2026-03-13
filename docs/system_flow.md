@@ -107,6 +107,12 @@ Use this as the historical log:
 - tests
 - commit reference
 - related links
+- keep entries in chronological order and append new ones at the end
+
+For long-running projects:
+- archive older entries into `context/archive/`
+- keep the active history file concise enough for regular review
+- use `npm run context:archive-history -- --keep-latest 100` when the file grows too large
 
 ### `context/master_plan.md`
 Use this for:
@@ -154,6 +160,9 @@ Useful validation commands:
 ```bash
 npm run verify:context
 npm run verify:project-map
+npm run project-map:sync
+npm run context:run-verification
+npm run acf:status
 npm run mcp:status
 npm run mcp:smoke
 ```

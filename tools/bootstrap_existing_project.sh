@@ -88,7 +88,6 @@ manifests = {
 }
 
 verification_candidates = [
-    ("package.json", "npm test"),
     ("vitest.config.ts", "npm run test"),
     ("vitest.config.js", "npm run test"),
     ("pytest.ini", "pytest"),
@@ -143,8 +142,22 @@ for _, label in manifest_hits:
         stack_signals.append(label)
 
 verification_command = "replace with project command"
+package_json_path = root / "package.json"
+if package_json_path.exists():
+    try:
+        package_data = json.loads(package_json_path.read_text(encoding="utf-8"))
+        scripts = package_data.get("scripts", {})
+        if isinstance(scripts, dict):
+            for script_name in ("verify", "check", "test"):
+                script_value = scripts.get(script_name)
+                if isinstance(script_value, str) and script_value.strip():
+                    verification_command = "npm test" if script_name == "test" else f"npm run {script_name}"
+                    break
+    except json.JSONDecodeError:
+        pass
+
 for filename, command in verification_candidates:
-    if filename in manifest_names:
+    if verification_command == "replace with project command" and filename in manifest_names:
         verification_command = command
         break
 

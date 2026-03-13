@@ -47,8 +47,12 @@ Some automation in this repository is Codex-aware, especially MCP registration s
 - `tools/init_project_context.sh` for direct project initialization
 - `tools/bootstrap_existing_project.sh` for draft context generation in existing repositories
 - `tools/generate_project_map.js` for draft project-map generation
+- `tools/sync_project_map.js` for refreshing a generated project-map draft without overwriting manual edits
 - `tools/verify_context_links.js` for code-reference validation
 - `tools/verify_project_map.js` for project-map path validation
+- `tools/run_next_verification.js` for running the verification command from `next_context_sync.md`
+- `tools/archive_context_history.js` for archiving older change-history entries
+- `tools/acf_status.js` for a quick framework status summary
 - MCP helper scripts for container setup, registration, and smoke checks
 
 ## Requirements
@@ -259,6 +263,10 @@ Useful commands:
 ```bash
 npm run acf:setup
 npm run generate:project-map
+npm run project-map:sync
+npm run context:run-verification
+npm run context:archive-history -- --keep-latest 100
+npm run acf:status
 npm run mcp:init
 npm run verify:context
 npm run verify:project-map

@@ -47,8 +47,12 @@ Część automatyzacji w tym repo jest świadoma integracji z Codexem, szczegól
 - `tools/init_project_context.sh` do bezpośredniej inicjalizacji projektu
 - `tools/bootstrap_existing_project.sh` do generowania draftu kontekstu dla istniejących repo
 - `tools/generate_project_map.js` do generowania draftu mapy projektu
+- `tools/sync_project_map.js` do odświeżania wygenerowanego draftu mapy projektu bez nadpisywania ręcznych zmian
 - `tools/verify_context_links.js` do walidacji referencji do kodu
 - `tools/verify_project_map.js` do walidacji ścieżek w mapie projektu
+- `tools/run_next_verification.js` do uruchamiania komendy weryfikacyjnej z `next_context_sync.md`
+- `tools/archive_context_history.js` do archiwizacji starszych wpisów historii zmian
+- `tools/acf_status.js` do szybkiego podsumowania stanu frameworka
 - skrypty MCP do tworzenia kontenerów, rejestracji i smoke testów
 
 ## Wymagania
@@ -259,6 +263,10 @@ Przydatne komendy:
 ```bash
 npm run acf:setup
 npm run generate:project-map
+npm run project-map:sync
+npm run context:run-verification
+npm run context:archive-history -- --keep-latest 100
+npm run acf:status
 npm run mcp:init
 npm run verify:context
 npm run verify:project-map

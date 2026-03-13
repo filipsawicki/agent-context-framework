@@ -89,6 +89,12 @@ npm run verify:context
 node tools/mcp_memory_smoke_test.cjs
 ```
 
+- optional status summary:
+
+```bash
+npm run acf:status
+```
+
 ## 7. Register MCP In Codex
 - use the command from:
   - `docs/mcp_ai_memory_setup.md`
@@ -122,10 +128,12 @@ node tools/mcp_memory_smoke_test.cjs
 - MCP is a supporting layer
 - after each closed slice:
   - short code review
+  - run the verification command from `context/next_context_sync.md` when it is configured
   - implementation commit
   - update `context/*`
   - 1 concise MCP entry
   - context-sync commit if docs changed
+- archive older `context/context_change_history.md` entries when the active history becomes too large to review comfortably
 
 ## 11. Note For The Agent
 - the agent will not pick this checklist automatically
