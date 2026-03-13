@@ -129,6 +129,35 @@ npm run acf:setup
 npm run verify:context
 ```
 
+## Szybka Instalacja Przez Agenta
+Jeśli pracujesz już z agentem AI do kodu, możesz zlecić instalację zamiast robić setup ręcznie.
+
+Użyj takiego promptu w repo docelowym:
+
+```text
+Zainstaluj Agent Context Framework w tym repozytorium.
+
+Kroki:
+1. Sklonuj albo skopiuj ACF do tego repo.
+2. Uruchom `npm install` w katalogu ACF.
+3. Uruchom `npm run acf:setup`.
+4. Jeśli repozytorium ma już kod, wybierz tryb `existing`.
+5. Po setupie uruchom `npm run verify:context`.
+6. Podsumuj, co zostało utworzone i co dalej wymaga ręcznego review.
+```
+
+Bardziej precyzyjna wersja:
+
+```text
+Podłącz Agent Context Framework do tego istniejącego repozytorium, użyj trybu `existing`, zweryfikuj wygenerowane linki kontekstowe i potem wskaż mi, które pliki kontekstowe powinienem przejrzeć najpierw.
+```
+
+Najkrótsza wersja do wklejenia:
+
+```text
+Zainstaluj tutaj ACF, wybierz `existing`, jeśli to repo ma już kod, uruchom setup, zweryfikuj linki kontekstowe i powiedz mi, co mam przejrzeć dalej.
+```
+
 ## Przykład Nieinteraktywny
 
 ```bash
