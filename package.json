@@ -1,0 +1,20 @@
+{
+  "name": "agent-context-framework",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A file-based framework for bootstrapping, preserving, and handing off project context across AI agent sessions.",
+  "scripts": {
+    "acf:setup": "bash tools/acf_setup.sh",
+    "verify:context": "node tools/verify_context_links.js",
+    "mcp:init": "bash tools/mcp_memory_containers.sh init",
+    "mcp:smoke": "node tools/mcp_memory_smoke_test.cjs",
+    "mcp:start": "bash tools/mcp_memory_containers.sh start",
+    "mcp:status": "bash tools/mcp_memory_containers.sh status",
+    "mcp:stop": "bash tools/mcp_memory_containers.sh stop",
+    "mcp:register": "bash tools/register_mcp_servers.sh"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "mcp-ai-memory": "^2.0.1"
+  }
+}
