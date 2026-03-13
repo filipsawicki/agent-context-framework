@@ -4,7 +4,7 @@ Lightweight, file-based framework for bootstrapping, preserving, and handing off
 
 Agent Context Framework helps teams keep continuity in AI-assisted software projects, especially across fresh sessions, context resets, and handoffs. Canonical project state lives in Markdown files under `context/*`, while MCP Memory serves as a supporting semantic recall layer.
 
-For the Polish version, see [README.pl.md](README.pl.md).
+For the Polish version, see [PRZECZYTAJ_MNIE.md](PRZECZYTAJ_MNIE.md).
 
 ## Why ACF
 - keeps a canonical, file-based source of truth in `context/*`
