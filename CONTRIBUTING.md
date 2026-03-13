@@ -4,6 +4,7 @@ Thanks for considering a contribution to Agent Context Framework.
 
 ## Before You Start
 - read [README.md](README.md)
+- read [docs/acf_scope_boundary.md](docs/acf_scope_boundary.md)
 - review [NEW_PROJECT_CHECKLIST.md](NEW_PROJECT_CHECKLIST.md) and [docs/agent_workflow.md](docs/agent_workflow.md)
 - keep `context/*` and MCP usage rules consistent with [docs/mcp_memory_rules.md](docs/mcp_memory_rules.md)
 

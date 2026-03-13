@@ -60,6 +60,7 @@ npm install
   - `config/project.env`
   - `context/next_context_sync.md`
   - `context/project_map.md`
+  - `context/procedures/README.md`
   - `context/handoff_migration.md`
   - `docs/mcp_ai_memory_setup.md`
 
@@ -99,6 +100,8 @@ node tools/mcp_memory_smoke_test.cjs
   - `context/handoff_migration.md`
 - write the lightweight repo map into:
   - `context/project_map.md`
+- write repo-specific procedures into:
+  - `context/procedures/`
 - write the initial working state into:
   - `context/next_context_sync.md`
 - write the first historical record into:
@@ -108,6 +111,7 @@ node tools/mcp_memory_smoke_test.cjs
 - in the first session, tell the agent to:
   - read `context/next_context_sync.md`
   - read `context/project_map.md`
+  - read a relevant file from `context/procedures/` if the task matches a known workflow
   - recall prior decisions from MCP
   - verify recall against:
     - `context/handoff_migration.md`
@@ -131,3 +135,4 @@ node tools/mcp_memory_smoke_test.cjs
 - after bootstrap, the main startup file for the agent remains:
   - `context/next_context_sync.md`
   - followed by `context/project_map.md`
+  - with `context/procedures/` consulted only when relevant

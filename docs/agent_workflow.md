@@ -10,12 +10,13 @@ This starter should ensure that a new agent:
 ## Standard Session Flow
 1. Read `context/next_context_sync.md`.
 2. Read `context/project_map.md`.
-3. Recall prior decisions from MCP.
-4. Verify recall against:
+3. If the task matches a known repository workflow, read the relevant file in `context/procedures/`.
+4. Recall prior decisions from MCP.
+5. Verify recall against:
    - `context/handoff_migration.md`
    - `context/context_change_history.md`
-5. Do the work.
-6. Close the slice with:
+6. Do the work.
+7. Close the slice with:
    - a short code review
    - an implementation commit
    - an update to `context/*`
@@ -31,6 +32,10 @@ This starter should ensure that a new agent:
   - repo orientation
   - major modules
   - important files
+- `context/procedures/`
+  - repo-specific recipes
+  - recurring implementation patterns
+  - close-out expectations
 - `context/handoff_migration.md`
   - technical state
   - decisions

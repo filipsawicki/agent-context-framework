@@ -7,6 +7,10 @@ This document explains how Agent Context Framework stores project knowledge and 
 - MCP Memory is a supporting recall layer
 - when MCP and `context/*` differ, `context/*` wins
 
+## Scope Rule
+- ACF should stay lightweight by default.
+- For the detailed product boundary, see `docs/acf_scope_boundary.md`.
+
 ## High-Level Architecture
 
 ```text
@@ -36,11 +40,12 @@ At the beginning of a session, the agent should:
 
 1. Read `context/next_context_sync.md`.
 2. Read `context/project_map.md` to orient on entrypoints, modules, and important files.
-3. Use MCP recall for project-specific keywords, recent decisions, or known feature names.
-4. Verify the recalled information against:
+3. Read a relevant file from `context/procedures/` if the task matches a recurring repository workflow.
+4. Use MCP recall for project-specific keywords, recent decisions, or known feature names.
+5. Verify the recalled information against:
    - `context/handoff_migration.md`
    - `context/context_change_history.md`
-5. Continue work only after the canonical files and recalled memory are aligned.
+6. Continue work only after the canonical files and recalled memory are aligned.
 
 Why this matters:
 - MCP recall is fast but not canonical
@@ -78,6 +83,12 @@ Use this as the lightweight repository-orientation file:
 - infrastructure areas
 - integration points
 - important files worth reading early
+
+### `context/procedures/`
+Use this as the procedural memory layer:
+- repo-specific ways of doing recurring tasks
+- short recipes for common changes
+- validation expectations before closing a slice
 
 ### `context/handoff_migration.md`
 Use this for stable technical context:

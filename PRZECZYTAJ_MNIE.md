@@ -13,6 +13,10 @@ Angielska wersja główna znajduje się w [README.md](README.md).
 - traktuje MCP jako warstwę pomocniczą, a nie jedyne miejsce przechowywania wiedzy o projekcie
 - pozostaje lekki architektonicznie, ale obejmuje szeroki workflow projektowy
 
+## Granica Zakresu
+ACF powinien pozostać lekki domyślnie.
+Szczegółowy opis granicy produktu i ewentualnych trybów rozszerzonych znajduje się w [docs/acf_scope_boundary.md](docs/acf_scope_boundary.md).
+
 ## Kompatybilność Z Agentami
 ACF jest agent-agnostic na poziomie workflow.
 
@@ -35,6 +39,7 @@ Część automatyzacji w tym repo jest świadoma integracji z Codexem, szczegól
 ## Co Dostajesz
 - `context/next_context_sync.md` jako plik startowy i aktywną mapę kodu
 - `context/project_map.md` jako lekką mapę repozytorium i modułów
+- `context/procedures/` jako pamięć proceduralną i zbiór repo-specyficznych sposobów pracy
 - `context/handoff_migration.md` jako stan techniczny, decyzje i runbooki
 - `context/context_change_history.md` jako historię zmian, testów i commitów
 - `context/master_plan.md` jako scope i zasady delivery
@@ -81,6 +86,7 @@ npm run acf:setup
 6. Po zakończeniu setupu przejrzyj:
 - `context/next_context_sync.md`
 - `context/project_map.md`
+- `context/procedures/README.md`
 - `context/handoff_migration.md`
 - `docs/mcp_ai_memory_setup.md`
 
@@ -207,10 +213,11 @@ W ACF rekomendowany przebieg sesji wygląda tak:
 
 1. Agent zaczyna od `context/next_context_sync.md`.
 2. Agent czyta `context/project_map.md`, żeby szybko zorientować się w modułach, entrypointach i ważnych plikach.
-3. Agent robi recall odpowiednich wpisów z MCP Memory.
-4. Agent weryfikuje recall względem kanonicznych plików w `context/*`.
-5. Agent pracuje na kodzie.
-6. Część pracy jest zamykana przez:
+3. Jeśli zadanie pasuje do znanej konwencji repo, agent czyta odpowiedni plik z `context/procedures/`.
+4. Agent robi recall odpowiednich wpisów z MCP Memory.
+5. Agent weryfikuje recall względem kanonicznych plików w `context/*`.
+6. Agent pracuje na kodzie.
+7. Część pracy jest zamykana przez:
 - krótki code review
 - commit implementacyjny
 - aktualizację `context/*`
@@ -231,6 +238,7 @@ To działa dlatego, że:
 - `context/*` jest współdzielonym, kanonicznym stanem projektu
 - `context/next_context_sync.md` jest wspólnym punktem startowym dla każdej nowej sesji
 - `context/project_map.md` daje każdej sesji lekką mapę repo przed głębszą analizą
+- `context/procedures/` opisuje repo-specyficzne sposoby wykonywania powtarzalnych zmian
 - MCP Memory służy do zwięzłego recallu, a nie jako jedyne źródło prawdy
 
 Żeby praca wielu agentów była stabilna:
@@ -261,6 +269,7 @@ npm run mcp:smoke
 
 ## Mapa Dokumentacji
 - [NEW_PROJECT_CHECKLIST.md](NEW_PROJECT_CHECKLIST.md): checklista setupu dla człowieka
+- [docs/acf_scope_boundary.md](docs/acf_scope_boundary.md): co należy do core ACF, a co do ewentualnych trybów rozszerzonych
 - [docs/system_flow.md](docs/system_flow.md): architektura i przepływ pamięci
 - [docs/agent_workflow.md](docs/agent_workflow.md): codzienny workflow agenta
 - [docs/mcp_ai_memory_setup.md](docs/mcp_ai_memory_setup.md): rejestracja MCP i setup runtime
@@ -274,8 +283,9 @@ Działaj jako senior engineer dla projektu <nazwa>.
 Startup:
 1. Przeczytaj `context/next_context_sync.md`.
 2. Przeczytaj `context/project_map.md`.
-3. Zrób recall wcześniejszych decyzji z MCP `<server-name>` po słowach kluczowych projektu.
-4. Zweryfikuj recall względem:
+3. Jeśli zadanie pasuje do znanej procedury, przeczytaj odpowiedni plik z `context/procedures/`.
+4. Zrób recall wcześniejszych decyzji z MCP `<server-name>` po słowach kluczowych projektu.
+5. Zweryfikuj recall względem:
    - `context/handoff_migration.md`
    - `context/context_change_history.md`
 

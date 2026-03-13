@@ -10,6 +10,7 @@
 ## Context Operating Rules
 - New sessions should start from `context/next_context_sync.md`; that file is the main entrypoint and tells the agent what else to verify.
 - `context/project_map.md` is the lightweight repo-orientation map and should be read early in each session.
+- `context/procedures/` is the procedural memory layer and should be consulted only when the task matches a recurring repository workflow.
 - `next_context_sync.md` is the compact code map and should prefer entries like:
   - `Class.method() @ path/to/file:line -> change; next: ...`
   - `Class.method() @ path/to/file:line -> change; risk: ...`
@@ -32,9 +33,11 @@
 - `context/*` is canonical truth.
 - MCP memory is support memory only.
 - On mismatch, canonical files win.
+- Stabilize the current core before expanding ACF further.
+- Evaluate `context/project_map.md` and `context/procedures/` in real use before considering optional future tiers.
 
 ## Risks / Gaps
-- Replace with real risks.
+- ACF can drift into a heavier repository-analysis system if the core expands too quickly.
 
 ## Runbooks
 - Build/test command: replace with actual command
