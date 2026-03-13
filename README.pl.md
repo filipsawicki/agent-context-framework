@@ -13,6 +13,25 @@ Angielska wersja główna znajduje się w [README.md](README.md).
 - traktuje MCP jako warstwę pomocniczą, a nie jedyne miejsce przechowywania wiedzy o projekcie
 - pozostaje lekki architektonicznie, ale obejmuje szeroki workflow projektowy
 
+## Kompatybilność Z Agentami
+ACF jest agent-agnostic na poziomie workflow.
+
+To znaczy, że główny model pracy działa z:
+- Codex
+- ChatGPT
+- Claude
+- Cursor
+- Aider
+- Continue
+- własnymi agentami CLI lub agentami w edytorze
+
+Sam framework opiera się na:
+- kanonicznych plikach kontekstowych w `context/*`
+- powtarzalnych zasadach startu i handoffu
+- MCP jako opcjonalnej, pomocniczej warstwie pamięci
+
+Część automatyzacji w tym repo jest świadoma integracji z Codexem, szczególnie skrypty rejestracji MCP, ale sam workflow nie zależy od Codexa.
+
 ## Co Dostajesz
 - `context/next_context_sync.md` jako plik startowy i aktywną mapę kodu
 - `context/handoff_migration.md` jako stan techniczny, decyzje i runbooki
@@ -162,6 +181,29 @@ W ACF rekomendowany przebieg sesji wygląda tak:
 
 Najważniejsza zasada:
 - `context/*` wygrywa nad MCP.
+
+## Praca Wielu Agentów
+ACF dobrze nadaje się do pracy wielu agentów nad jednym projektem.
+
+Typowe przykłady:
+- jeden agent pracuje nad backendem
+- drugi agent pracuje nad frontendem
+- kolejny agent robi review albo aktualizuje dokumentację
+
+To działa dlatego, że:
+- `context/*` jest współdzielonym, kanonicznym stanem projektu
+- `context/next_context_sync.md` jest wspólnym punktem startowym dla każdej nowej sesji
+- MCP Memory służy do zwięzłego recallu, a nie jako jedyne źródło prawdy
+
+Żeby praca wielu agentów była stabilna:
+- każda zamknięta część pracy powinna aktualizować `context/*`
+- każda zamknięta część pracy powinna zapisywać jeden zwięzły rekord do MCP
+- każda nowa sesja powinna zaczynać od `context/next_context_sync.md`
+- jeśli MCP i `context/*` się różnią, wygrywa `context/*`
+
+W skrócie:
+- ACF wspiera pracę wielu agentów nad jednym projektem
+- to współdzielone pliki kontekstowe utrzymują tych agentów w zgodzie
 
 ## Setup MCP
 Szczegóły rejestracji MCP i środowiska znajdziesz w [docs/mcp_ai_memory_setup.md](docs/mcp_ai_memory_setup.md).

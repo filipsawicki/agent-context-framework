@@ -13,6 +13,25 @@ For the Polish version, see [README.pl.md](README.pl.md).
 - keeps MCP as a supporting memory layer instead of the only project record
 - stays lightweight in architecture while covering a broad project workflow
 
+## Agent Compatibility
+ACF is agent-agnostic at the workflow level.
+
+That means the core model works with:
+- Codex
+- ChatGPT
+- Claude
+- Cursor
+- Aider
+- Continue
+- custom CLI or editor agents
+
+The framework itself is based on:
+- canonical context files in `context/*`
+- repeatable startup and handoff rules
+- MCP as an optional supporting memory layer
+
+Some automation in this repository is Codex-aware, especially MCP registration scripts, but the workflow itself does not depend on Codex.
+
 ## What You Get
 - `context/next_context_sync.md` for startup and active code-map references
 - `context/handoff_migration.md` for technical state, decisions, and runbooks
@@ -162,6 +181,29 @@ In ACF, the recommended session flow is:
 
 Primary rule:
 - `context/*` wins over MCP.
+
+## Multi-Agent Use
+ACF works well when multiple agents collaborate on the same project.
+
+Typical examples:
+- one agent works on backend changes
+- another agent works on frontend changes
+- another agent reviews or updates documentation
+
+This works because:
+- `context/*` is shared canonical state
+- `context/next_context_sync.md` is the common startup point for every new session
+- MCP Memory is used for concise recall, not as the only source of truth
+
+For multi-agent work to stay reliable:
+- every closed work slice should update `context/*`
+- every closed work slice should write one concise MCP record
+- every new session should start from `context/next_context_sync.md`
+- when MCP and `context/*` differ, `context/*` wins
+
+In short:
+- ACF supports multiple agents on one project
+- the shared context files are what keep those agents aligned
 
 ## MCP Setup
 Use [docs/mcp_ai_memory_setup.md](docs/mcp_ai_memory_setup.md) for MCP registration and environment details.
