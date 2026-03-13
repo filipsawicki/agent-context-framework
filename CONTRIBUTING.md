@@ -26,6 +26,7 @@ Run these checks before opening a pull request:
 
 ```bash
 npm run verify:context
+node tools/generate_project_map.js
 bash -n tools/init_project_context.sh tools/mcp_memory_containers.sh tools/mcp_memory_on_demand.sh
 ```
 

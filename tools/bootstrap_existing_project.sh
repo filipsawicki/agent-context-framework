@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 INIT_SCRIPT="$ROOT_DIR/tools/init_project_context.sh"
+PROJECT_MAP_SCRIPT="$ROOT_DIR/tools/generate_project_map.js"
 
 PROJECT_NAME=""
 PROJECT_SLUG=""
@@ -40,7 +41,9 @@ ARGS=()
 
 "$INIT_SCRIPT" "${ARGS[@]}"
 
-python3 - <<'PY'
+node "$PROJECT_MAP_SCRIPT" --root "$ROOT_DIR" --out "$ROOT_DIR/context/project_map.md"
+
+ROOT_DIR_OVERRIDE="$ROOT_DIR" python3 - <<'PY'
 from __future__ import annotations
 
 import json
@@ -62,6 +65,7 @@ ignore_dirs = {
     ".turbo",
     ".idea",
     ".vscode",
+    ".github",
 }
 
 manifests = {
@@ -190,10 +194,11 @@ context_next.write_text(
 
 ## Startup Checklist
 1. Read this file.
-2. Recall prior decisions from `__MCP_SERVER_NAME__` using project-specific keywords.
-3. Verify recall against `context/handoff_migration.md` and `context/context_change_history.md`.
-4. If MCP health is unclear, run `./tools/mcp_memory_containers.sh status` and use `node tools/mcp_memory_smoke_test.cjs` for a deeper smoke check.
-5. Continue from the next recommended step below.
+2. Read `context/project_map.md` to orient on repo structure before touching code.
+3. Recall prior decisions from `__MCP_SERVER_NAME__` using project-specific keywords.
+4. Verify recall against `context/handoff_migration.md` and `context/context_change_history.md`.
+5. If MCP health is unclear, run `./tools/mcp_memory_containers.sh status` and use `node tools/mcp_memory_smoke_test.cjs` for a deeper smoke check.
+6. Continue from the next recommended step below.
 
 ## Last Completed Part
 - Existing repository bootstrap completed.
@@ -232,7 +237,8 @@ context_handoff.write_text(
 - Local Git remote `origin`: set per repo
 
 ## Context Operating Rules
-- New sessions should start from `context/next_context_sync.md`.
+- New sessions should start from `context/next_context_sync.md` and then read `context/project_map.md` for repo orientation.
+- `project_map.md` is the lightweight architecture index: entrypoints, important modules, integration points, and high-value files.
 - `context/*` remains canonical truth.
 - MCP writes should stay concise and target only `__MCP_SERVER_NAME__`.
 - This file was generated from an existing repository scan and requires human review.
@@ -283,7 +289,7 @@ context_master.write_text(
 - Sync MCP Memory and `context/*` after each meaningful milestone.
 
 ## MCP And Context Rules
-- Canonical truth lives in `context/next_context_sync.md`, `context/handoff_migration.md`, `context/context_change_history.md`.
+- Canonical truth lives in `context/next_context_sync.md`, `context/project_map.md`, `context/handoff_migration.md`, `context/context_change_history.md`.
 - MCP Memory is support memory only.
 - On mismatch, canonical files win.
 
@@ -319,5 +325,5 @@ PY
 cat <<EOF
 [starter] Existing repository bootstrap complete
   Draft context generated from repository scan
-  Review context/next_context_sync.md, context/handoff_migration.md, context/master_plan.md, and context/context_change_history.md
+  Review context/next_context_sync.md, context/project_map.md, context/handoff_migration.md, context/master_plan.md, and context/context_change_history.md
 EOF

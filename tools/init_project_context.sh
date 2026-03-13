@@ -68,6 +68,7 @@ targets = [
     root / "docs" / "mcp_ai_memory_setup.md",
     root / "docs" / "mcp_memory_rules.md",
     root / "context" / "next_context_sync.md",
+    root / "context" / "project_map.md",
     root / "context" / "handoff_migration.md",
     root / "context" / "master_plan.md",
 ]

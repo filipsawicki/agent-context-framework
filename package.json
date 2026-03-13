@@ -5,7 +5,10 @@
   "description": "A file-based framework for bootstrapping, preserving, and handing off project context across AI agent sessions.",
   "scripts": {
     "acf:setup": "bash tools/acf_setup.sh",
-    "verify:context": "node tools/verify_context_links.js",
+    "verify:context": "node tools/verify_context.js",
+    "verify:context-links": "node tools/verify_context_links.js",
+    "generate:project-map": "node tools/generate_project_map.js",
+    "verify:project-map": "node tools/verify_project_map.js",
     "mcp:init": "bash tools/mcp_memory_containers.sh init",
     "mcp:smoke": "node tools/mcp_memory_smoke_test.cjs",
     "mcp:start": "bash tools/mcp_memory_containers.sh start",

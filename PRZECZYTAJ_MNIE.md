@@ -34,13 +34,16 @@ Część automatyzacji w tym repo jest świadoma integracji z Codexem, szczegól
 
 ## Co Dostajesz
 - `context/next_context_sync.md` jako plik startowy i aktywną mapę kodu
+- `context/project_map.md` jako lekką mapę repozytorium i modułów
 - `context/handoff_migration.md` jako stan techniczny, decyzje i runbooki
 - `context/context_change_history.md` jako historię zmian, testów i commitów
 - `context/master_plan.md` jako scope i zasady delivery
 - `tools/acf_setup.sh` jako główny interaktywny entrypoint
 - `tools/init_project_context.sh` do bezpośredniej inicjalizacji projektu
 - `tools/bootstrap_existing_project.sh` do generowania draftu kontekstu dla istniejących repo
+- `tools/generate_project_map.js` do generowania draftu mapy projektu
 - `tools/verify_context_links.js` do walidacji referencji do kodu
+- `tools/verify_project_map.js` do walidacji ścieżek w mapie projektu
 - skrypty MCP do tworzenia kontenerów, rejestracji i smoke testów
 
 ## Wymagania
@@ -77,6 +80,7 @@ npm run acf:setup
 
 6. Po zakończeniu setupu przejrzyj:
 - `context/next_context_sync.md`
+- `context/project_map.md`
 - `context/handoff_migration.md`
 - `docs/mcp_ai_memory_setup.md`
 
@@ -184,6 +188,9 @@ LLM Agent
 context/next_context_sync.md
    |
    v
+context/project_map.md
+   |
+   v
 MCP semantic recall
    |
    v
@@ -199,10 +206,11 @@ update context + memory
 W ACF rekomendowany przebieg sesji wygląda tak:
 
 1. Agent zaczyna od `context/next_context_sync.md`.
-2. Agent robi recall odpowiednich wpisów z MCP Memory.
-3. Agent weryfikuje recall względem kanonicznych plików w `context/*`.
-4. Agent pracuje na kodzie.
-5. Część pracy jest zamykana przez:
+2. Agent czyta `context/project_map.md`, żeby szybko zorientować się w modułach, entrypointach i ważnych plikach.
+3. Agent robi recall odpowiednich wpisów z MCP Memory.
+4. Agent weryfikuje recall względem kanonicznych plików w `context/*`.
+5. Agent pracuje na kodzie.
+6. Część pracy jest zamykana przez:
 - krótki code review
 - commit implementacyjny
 - aktualizację `context/*`
@@ -222,12 +230,13 @@ Typowe przykłady:
 To działa dlatego, że:
 - `context/*` jest współdzielonym, kanonicznym stanem projektu
 - `context/next_context_sync.md` jest wspólnym punktem startowym dla każdej nowej sesji
+- `context/project_map.md` daje każdej sesji lekką mapę repo przed głębszą analizą
 - MCP Memory służy do zwięzłego recallu, a nie jako jedyne źródło prawdy
 
 Żeby praca wielu agentów była stabilna:
 - każda zamknięta część pracy powinna aktualizować `context/*`
 - każda zamknięta część pracy powinna zapisywać jeden zwięzły rekord do MCP
-- każda nowa sesja powinna zaczynać od `context/next_context_sync.md`
+- każda nowa sesja powinna zaczynać od `context/next_context_sync.md`, a potem czytać `context/project_map.md`
 - jeśli MCP i `context/*` się różnią, wygrywa `context/*`
 
 W skrócie:
@@ -241,8 +250,10 @@ Przydatne komendy:
 
 ```bash
 npm run acf:setup
+npm run generate:project-map
 npm run mcp:init
 npm run verify:context
+npm run verify:project-map
 npm run mcp:register
 npm run mcp:status
 npm run mcp:smoke
@@ -262,8 +273,9 @@ Działaj jako senior engineer dla projektu <nazwa>.
 
 Startup:
 1. Przeczytaj `context/next_context_sync.md`.
-2. Zrób recall wcześniejszych decyzji z MCP `<server-name>` po słowach kluczowych projektu.
-3. Zweryfikuj recall względem:
+2. Przeczytaj `context/project_map.md`.
+3. Zrób recall wcześniejszych decyzji z MCP `<server-name>` po słowach kluczowych projektu.
+4. Zweryfikuj recall względem:
    - `context/handoff_migration.md`
    - `context/context_change_history.md`
 

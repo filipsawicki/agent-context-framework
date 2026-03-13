@@ -10,15 +10,16 @@
 - Sync MCP Memory and `context/*` after each meaningful milestone.
 
 ## MCP And Context Rules
-- Canonical truth lives in `context/next_context_sync.md`, `context/handoff_migration.md`, `context/context_change_history.md`.
+- Canonical truth lives in `context/next_context_sync.md`, `context/project_map.md`, `context/handoff_migration.md`, `context/context_change_history.md`.
 - MCP Memory is support memory only.
 - On mismatch, canonical files win.
 - Session startup flow:
   1. Read `context/next_context_sync.md`.
-  2. Recall previous decisions from MCP Memory.
-  3. Verify against `handoff_migration.md` and `context_change_history.md`.
-  4. After changes, update all canonical files.
-  5. Store one concise MCP record.
+  2. Read `context/project_map.md`.
+  3. Recall previous decisions from MCP Memory.
+  4. Verify against `handoff_migration.md` and `context_change_history.md`.
+  5. After changes, update all canonical files.
+  6. Store one concise MCP record.
 
 ## Phase Status
 - Foundation: planned

@@ -16,6 +16,9 @@ LLM Agent
 context/next_context_sync.md
    |
    v
+context/project_map.md
+   |
+   v
 MCP semantic recall
    |
    v
@@ -32,11 +35,12 @@ update context + memory
 At the beginning of a session, the agent should:
 
 1. Read `context/next_context_sync.md`.
-2. Use MCP recall for project-specific keywords, recent decisions, or known feature names.
-3. Verify the recalled information against:
+2. Read `context/project_map.md` to orient on entrypoints, modules, and important files.
+3. Use MCP recall for project-specific keywords, recent decisions, or known feature names.
+4. Verify the recalled information against:
    - `context/handoff_migration.md`
    - `context/context_change_history.md`
-4. Continue work only after the canonical files and recalled memory are aligned.
+5. Continue work only after the canonical files and recalled memory are aligned.
 
 Why this matters:
 - MCP recall is fast but not canonical
@@ -66,6 +70,14 @@ It should contain:
 Recommended code-map format:
 - `Class.method() @ path/to/file:line -> change; next: ...`
 - `Class.method() @ path/to/file:line -> change; risk: ...`
+
+### `context/project_map.md`
+Use this as the lightweight repository-orientation file:
+- entrypoints
+- core modules
+- infrastructure areas
+- integration points
+- important files worth reading early
 
 ### `context/handoff_migration.md`
 Use this for stable technical context:
@@ -130,6 +142,7 @@ Useful validation commands:
 
 ```bash
 npm run verify:context
+npm run verify:project-map
 npm run mcp:status
 npm run mcp:smoke
 ```

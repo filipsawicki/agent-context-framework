@@ -3,6 +3,7 @@
 ## Source Of Truth
 - Canonical context is in:
   - `context/next_context_sync.md`
+  - `context/project_map.md`
   - `context/handoff_migration.md`
   - `context/context_change_history.md`
 - MCP memory is support/index layer only.

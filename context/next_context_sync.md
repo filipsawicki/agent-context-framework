@@ -17,10 +17,11 @@
 
 ## Startup Checklist
 1. Read this file.
-2. Recall prior decisions from `__MCP_SERVER_NAME__` using project-specific keywords.
-3. Verify recall against `context/handoff_migration.md` and `context/context_change_history.md`.
-4. If MCP health is unclear, run `./tools/mcp_memory_containers.sh status` and use `node tools/mcp_memory_smoke_test.cjs` for a deeper smoke check.
-5. Continue from the next recommended step below.
+2. Read `context/project_map.md` to orient on modules, entrypoints, and important files.
+3. Recall prior decisions from `__MCP_SERVER_NAME__` using project-specific keywords.
+4. Verify recall against `context/handoff_migration.md` and `context/context_change_history.md`.
+5. If MCP health is unclear, run `./tools/mcp_memory_containers.sh status` and use `node tools/mcp_memory_smoke_test.cjs` for a deeper smoke check.
+6. Continue from the next recommended step below.
 
 ## Last Completed Part
 - Replace this section with closed milestones for the new project.

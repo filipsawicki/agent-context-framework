@@ -34,13 +34,16 @@ Some automation in this repository is Codex-aware, especially MCP registration s
 
 ## What You Get
 - `context/next_context_sync.md` for startup and active code-map references
+- `context/project_map.md` for lightweight repository orientation and module layout
 - `context/handoff_migration.md` for technical state, decisions, and runbooks
 - `context/context_change_history.md` for history, tests, and commits
 - `context/master_plan.md` for scope and delivery policy
 - `tools/acf_setup.sh` as the unified interactive entrypoint
 - `tools/init_project_context.sh` for direct project initialization
 - `tools/bootstrap_existing_project.sh` for draft context generation in existing repositories
+- `tools/generate_project_map.js` for draft project-map generation
 - `tools/verify_context_links.js` for code-reference validation
+- `tools/verify_project_map.js` for project-map path validation
 - MCP helper scripts for container setup, registration, and smoke checks
 
 ## Requirements
@@ -77,6 +80,7 @@ npm run acf:setup
 
 6. After setup finishes, review:
 - `context/next_context_sync.md`
+- `context/project_map.md`
 - `context/handoff_migration.md`
 - `docs/mcp_ai_memory_setup.md`
 
@@ -184,6 +188,9 @@ LLM Agent
 context/next_context_sync.md
    |
    v
+context/project_map.md
+   |
+   v
 MCP semantic recall
    |
    v
@@ -199,10 +206,11 @@ update context + memory
 In ACF, the recommended session flow is:
 
 1. The agent starts from `context/next_context_sync.md`.
-2. The agent recalls relevant MCP Memory entries.
-3. The agent verifies MCP recall against canonical files in `context/*`.
-4. The agent works on the codebase.
-5. The work slice is closed with:
+2. The agent reads `context/project_map.md` to orient on modules, entrypoints, and important files.
+3. The agent recalls relevant MCP Memory entries.
+4. The agent verifies MCP recall against canonical files in `context/*`.
+5. The agent works on the codebase.
+6. The work slice is closed with:
 - a short code review
 - an implementation commit
 - updates to `context/*`
@@ -222,12 +230,13 @@ Typical examples:
 This works because:
 - `context/*` is shared canonical state
 - `context/next_context_sync.md` is the common startup point for every new session
+- `context/project_map.md` gives each session a lightweight repo map before deeper analysis
 - MCP Memory is used for concise recall, not as the only source of truth
 
 For multi-agent work to stay reliable:
 - every closed work slice should update `context/*`
 - every closed work slice should write one concise MCP record
-- every new session should start from `context/next_context_sync.md`
+- every new session should start from `context/next_context_sync.md` and then read `context/project_map.md`
 - when MCP and `context/*` differ, `context/*` wins
 
 In short:
@@ -241,8 +250,10 @@ Useful commands:
 
 ```bash
 npm run acf:setup
+npm run generate:project-map
 npm run mcp:init
 npm run verify:context
+npm run verify:project-map
 npm run mcp:register
 npm run mcp:status
 npm run mcp:smoke
@@ -262,8 +273,9 @@ Act as a senior engineer for project <name>.
 
 Startup:
 1. Read `context/next_context_sync.md`.
-2. Recall prior decisions from MCP `<server-name>` using project-specific keywords.
-3. Verify recall against:
+2. Read `context/project_map.md`.
+3. Recall prior decisions from MCP `<server-name>` using project-specific keywords.
+4. Verify recall against:
    - `context/handoff_migration.md`
    - `context/context_change_history.md`
 

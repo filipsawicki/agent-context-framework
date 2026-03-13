@@ -9,6 +9,7 @@
 
 ## Context Operating Rules
 - New sessions should start from `context/next_context_sync.md`; that file is the main entrypoint and tells the agent what else to verify.
+- `context/project_map.md` is the lightweight repo-orientation map and should be read early in each session.
 - `next_context_sync.md` is the compact code map and should prefer entries like:
   - `Class.method() @ path/to/file:line -> change; next: ...`
   - `Class.method() @ path/to/file:line -> change; risk: ...`

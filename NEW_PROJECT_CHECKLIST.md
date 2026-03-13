@@ -59,6 +59,7 @@ npm install
 - review:
   - `config/project.env`
   - `context/next_context_sync.md`
+  - `context/project_map.md`
   - `context/handoff_migration.md`
   - `docs/mcp_ai_memory_setup.md`
 
@@ -66,7 +67,7 @@ npm install
 - first verify context references:
 
 ```bash
-node tools/verify_context_links.js
+npm run verify:context
 ```
 
 - check status:
@@ -96,6 +97,8 @@ node tools/mcp_memory_smoke_test.cjs
   - `context/master_plan.md`
 - write the real technical state into:
   - `context/handoff_migration.md`
+- write the lightweight repo map into:
+  - `context/project_map.md`
 - write the initial working state into:
   - `context/next_context_sync.md`
 - write the first historical record into:
@@ -104,6 +107,7 @@ node tools/mcp_memory_smoke_test.cjs
 ## 9. Start Working With The Agent
 - in the first session, tell the agent to:
   - read `context/next_context_sync.md`
+  - read `context/project_map.md`
   - recall prior decisions from MCP
   - verify recall against:
     - `context/handoff_migration.md`
@@ -126,3 +130,4 @@ node tools/mcp_memory_smoke_test.cjs
   - you mention it in the first prompt
 - after bootstrap, the main startup file for the agent remains:
   - `context/next_context_sync.md`
+  - followed by `context/project_map.md`
