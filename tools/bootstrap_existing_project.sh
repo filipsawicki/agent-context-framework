@@ -148,7 +148,7 @@ if package_json_path.exists():
         package_data = json.loads(package_json_path.read_text(encoding="utf-8"))
         scripts = package_data.get("scripts", {})
         if isinstance(scripts, dict):
-            for script_name in ("verify", "check", "test"):
+            for script_name in ("verify", "test", "check"):
                 script_value = scripts.get(script_name)
                 if isinstance(script_value, str) and script_value.strip():
                     verification_command = "npm test" if script_name == "test" else f"npm run {script_name}"

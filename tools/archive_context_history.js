@@ -75,9 +75,10 @@ function parseHistoryFile(markdown) {
   const entries = [];
   const suffix = [];
   let inEntries = true;
+  const entryPattern = /^- \d{4}-\d{2}-\d{2}\s+\| /;
 
   for (const line of remaining) {
-    if (inEntries && line.startsWith('- ')) {
+    if (inEntries && entryPattern.test(line)) {
       entries.push(line);
       continue;
     }

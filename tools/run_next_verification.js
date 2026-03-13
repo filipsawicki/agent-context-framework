@@ -34,6 +34,14 @@ function parseArgs(argv) {
   return options;
 }
 
+function inferWorkingDirectory(contextFilePath) {
+  const parentDir = path.dirname(contextFilePath);
+  if (path.basename(parentDir) === 'context') {
+    return path.resolve(parentDir, '..');
+  }
+  return parentDir;
+}
+
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (!fs.existsSync(options.file)) {
@@ -56,8 +64,9 @@ function main() {
   }
 
   console.log(`[context-verify-run] running: ${command}`);
+  const workingDirectory = inferWorkingDirectory(options.file);
   const result = spawnSync('bash', ['-lc', command], {
-    cwd: rootDir,
+    cwd: workingDirectory,
     stdio: 'inherit',
   });
 
